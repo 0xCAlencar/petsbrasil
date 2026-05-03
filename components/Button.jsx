@@ -1,0 +1,32 @@
+import React from 'react';
+import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { COLORS, SIZES } from '../constants/theme';
+
+export default function Button({ title, onPress, variant = 'primary', icon }) {
+  const isPrimary = variant === 'primary';
+  
+  return (
+    <TouchableOpacity 
+      style={[styles.button, isPrimary ? styles.primaryBg : styles.outlineBg]} 
+      onPress={onPress}
+      activeOpacity={0.8}
+    >
+      <View style={styles.content}>
+        {icon && <View style={styles.iconContainer}>{icon}</View>}
+        <Text style={[styles.text, isPrimary ? styles.primaryText : styles.outlineText]}>
+          {title}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+const styles = StyleSheet.create({
+  button: { width: '100%', paddingVertical: 14, borderRadius: SIZES.radius, alignItems: 'center', justifyContent: 'center', marginTop: 8 },
+  content: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  iconContainer: { marginRight: 10 },
+  primaryBg: { backgroundColor: COLORS.primary },
+  outlineBg: { backgroundColor: 'transparent', borderWidth: 1, borderColor: COLORS.border },
+  primaryText: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
+  outlineText: { color: COLORS.textDark, fontSize: 16, fontWeight: '500' },
+});
