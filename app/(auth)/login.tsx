@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, useWindowDimensions } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { useState } from 'react';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
-import AuthHeader from '../components/AuthHeader';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { COLORS } from '../constants/theme';
+import AuthHeader from '../../components/AuthHeader';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { COLORS } from '../../constants/theme';
 
 export default function LoginScreen() {
   const [form, setForm] = useState({ email: '', password: '' });
   const { width } = useWindowDimensions();
   const isDesktop = width >= 768; 
 
-  const handleChange = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
+  const handleChange = (field: keyof typeof form, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }))
+  }
 
   return (
     <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -24,14 +26,13 @@ export default function LoginScreen() {
           
           {isDesktop && (
             <View style={styles.bannerContainer}>
-              <Image source={require('../assets/images/logo_texto.png')} style={styles.mainLogo} resizeMode="contain" />
+              <Image source={require('../../assets/images/logo_texto.png')} style={styles.mainLogo} resizeMode="contain" />
             </View>
           )}
-
           <View style={styles.formContainer}>
             <View style={styles.titleRow}>
               <Text style={styles.title}>Bem-vindo de volta</Text>
-              <Image source={require('../assets/images/emoji.png')} style={styles.emoji} />
+              <Image source={require('../../assets/images/emoji.png')} style={styles.emoji} />
             </View>
             <Text style={styles.subtitle}>Entre na sua conta e continue fazendo a diferença!</Text>
 

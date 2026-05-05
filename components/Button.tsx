@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 
-export default function Button({ title, onPress, variant = 'primary', icon }) {
+interface ButtonProps {
+  title: string;
+  onPress: () => void;
+  variant?: 'primary' | 'outline';
+  icon?: ReactNode;
+}
+
+export default function Button({ title, onPress, variant = 'primary', icon }: ButtonProps) {
   const isPrimary = variant === 'primary';
   
   return (
@@ -13,7 +20,7 @@ export default function Button({ title, onPress, variant = 'primary', icon }) {
     >
       <View style={styles.content}>
         {icon && <View style={styles.iconContainer}>{icon}</View>}
-        <Text style={[styles.text, isPrimary ? styles.primaryText : styles.outlineText]}>
+        <Text style={isPrimary ? styles.primaryText : styles.outlineText}>
           {title}
         </Text>
       </View>

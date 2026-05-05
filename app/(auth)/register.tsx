@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView, TextInput } from 'react-native';
 import { Link } from 'expo-router';
+import React, { useState } from 'react';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import AuthHeader from '../components/AuthHeader';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { COLORS, SIZES } from '../constants/theme';
+import AuthHeader from '../../components/AuthHeader';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { COLORS, SIZES } from '../../constants/theme';
 
 export default function RegisterScreen() {
   const [form, setForm] = useState({ nome: '', dia: '', mes: '', ano: '', email: '', senha: '' });
   
-  const handleChange = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
+  const handleChange = (field: keyof typeof form, value: string) => setForm(prev => ({ ...prev, [field]: value }));
 
   return (
     <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -20,7 +20,7 @@ export default function RegisterScreen() {
         <View style={styles.contentWrapper}>
           
           <View style={styles.topSection}>
-            <Image source={require('../assets/images/logo.png')} style={styles.centerLogo} resizeMode="contain" />
+            <Image source={require('../../assets/images/logo.png')} style={styles.centerLogo} resizeMode="contain" />
             <Text style={styles.title}>Crie sua conta</Text>
             <Text style={styles.subtitle}>Junte-se a milhares de Brasileiros que fazem a diferença</Text>
           </View>
@@ -46,7 +46,7 @@ export default function RegisterScreen() {
           </View>
 
           <Text style={styles.loginText}>
-            Já tem conta? <Link href="/" style={styles.loginLink}>Entrar</Link>
+            Já tem conta? <Link href="/login" style={styles.loginLink}>Entrar</Link>
           </Text>
 
         </View>

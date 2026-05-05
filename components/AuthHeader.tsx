@@ -1,9 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { Link } from 'expo-router';
 import { COLORS } from '../constants/theme';
 
-export default function AuthHeader({ activeTab }) {
+interface AuthHeaderProps {
+  activeTab?: string;
+}
+
+export default function AuthHeader({ activeTab }: AuthHeaderProps) {
   const isRegister = activeTab === 'Cadastrar';
 
   return (
@@ -20,7 +23,7 @@ export default function AuthHeader({ activeTab }) {
             </View>
           )}
         </View>
-        <Link href="/help" style={styles.helpLink}>Precisa de Ajuda?</Link>
+        <Text style={styles.helpLink}>Precisa de Ajuda?</Text>
       </View>
       <View style={[styles.bottomLine, isRegister ? styles.lineRegister : styles.lineLogin]} />
     </View>

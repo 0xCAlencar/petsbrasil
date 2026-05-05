@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { Link, useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import AuthHeader from '../components/AuthHeader';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { COLORS } from '../constants/theme';
+import AuthHeader from '../../components/AuthHeader';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import { COLORS } from '../../constants/theme';
 
 export default function RecoverScreen() {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({ email: '', code: '', newPassword: '' });
 
-  const handleChange = (field, value) => setForm(prev => ({ ...prev, [field]: value }));
+  const handleChange = (field: keyof typeof form, value: string) => setForm(prev => ({ ...prev, [field]: value }));
 
   const handleNextStep = () => {
     if (step < 3) setStep(step + 1);
-    else router.push('/'); 
+    else router.push('/login');
   };
 
   const renderProgressBar = () => (
@@ -35,7 +35,7 @@ export default function RecoverScreen() {
         <View style={styles.contentWrapper}>
           
           <View style={styles.topSection}>
-            <Image source={require('../assets/images/logo.png')} style={styles.centerLogo} resizeMode="contain" />
+            <Image source={require('../../assets/images/logo.png')} style={styles.centerLogo} resizeMode="contain" />
             <Text style={styles.title}>Recupere sua senha</Text>
             <Text style={styles.subtitle}>Junte-se a milhares de Brasileiros que fazem a diferença</Text>
           </View>
@@ -73,7 +73,7 @@ export default function RecoverScreen() {
           </View>
 
           <Text style={styles.loginText}>
-            Já tem conta? <Link href="/" style={styles.loginLink}>Entrar</Link>
+            Já tem conta? <Link href="/login" style={styles.loginLink}>Entrar</Link>
           </Text>
 
         </View>
